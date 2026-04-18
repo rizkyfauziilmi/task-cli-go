@@ -1,0 +1,12 @@
+# binary
+task-cli
+*.exe
+
+# OS
+.DS_Store
+
+# env
+.env
+
+# json data (opsional, kalau gak mau ikut ke repo)
+tasks.json
