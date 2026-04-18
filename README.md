@@ -1,5 +1,3 @@
-Berikut `README.md` yang sudah rapi dan sudah menyertakan link latihan dari roadmap.sh:
-
 ```md
 # Task CLI (Go)
 
@@ -20,20 +18,6 @@ https://roadmap.sh/projects/task-tracker
 - Mark task as in-progress
 - Mark task as done
 - List tasks (filter by status)
-
----
-
-## 📁 Project Structure
-
-```
-
-task-cli/
-│── main.go
-│── model/
-│── storage/
-│── service/
-
-````
 
 ---
 
@@ -65,7 +49,7 @@ go run main.go add "Belajar Golang"
 ### Update task
 
 ```bash
-go run main.go update 1 "Belajar Go lebih dalam"
+go run main.go update 1 "Belajar Go Coroutines"
 ```
 
 ### Delete task
