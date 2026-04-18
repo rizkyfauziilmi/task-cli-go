@@ -112,7 +112,12 @@ func DeleteTask(tasks []model.Task, args []string) {
 
 func MarkStatus(tasks []model.Task, args []string, status string) {
 	if len(args) < 1 {
-		fmt.Println("Usage: <command> <id>")
+		fmt.Println("Usage: mark-in-progress/mark-done <id>")
+		return
+	}
+
+	if status != model.StatusInProgress && status != model.StatusDone {
+		fmt.Println("Invalid status")
 		return
 	}
 
