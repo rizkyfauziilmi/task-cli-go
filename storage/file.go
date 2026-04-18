@@ -17,25 +17,31 @@ func EnsureFile() error {
 }
 
 func LoadTasks() ([]model.Task, error) {
-	data, err := os.ReadFile(filePath)
+	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, err
 	}
+	defer file.Close()
 
 	var tasks []model.Task
-	if len(data) > 0 {
-		if err := json.Unmarshal(data, &tasks); err != nil {
-			return nil, err
-		}
+	err = json.NewDecoder(file).Decode(&tasks)
+	if err != nil {
+		// return empty slice if file empty
+		return []model.Task{}, nil
 	}
 
 	return tasks, nil
 }
 
 func SaveTasks(tasks []model.Task) error {
-	data, err := json.MarshalIndent(tasks, "", "  ")
+	file, err := os.Create(filePath)
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(filePath, data, 0644)
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "  ")
+
+	return encoder.Encode(tasks)
 }
