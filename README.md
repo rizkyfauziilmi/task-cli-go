@@ -108,10 +108,3 @@ tasks.json
 * [https://roadmap.sh/projects/task-tracker](https://roadmap.sh/projects/task-tracker)
 
 ```
-
----
-
-Kalau kamu mau, aku juga bisa bantu:
-- :contentReference[oaicite:0]{index=0}
-- atau :contentReference[oaicite:1]{index=1}
-```
