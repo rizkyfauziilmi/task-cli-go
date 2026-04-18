@@ -147,6 +147,10 @@ func ListTasks(tasks []model.Task, args []string) {
 	var filter string
 	if len(args) > 0 {
 		filter = strings.ToLower(args[0])
+		if filter != model.StatusDone && filter != model.StatusInProgress && filter != model.StatusTodo {
+			fmt.Println("Invalid filter. Use: todo, in-progress, done")
+			return
+		}
 	}
 
 	for _, t := range tasks {
