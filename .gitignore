@@ -1,5 +1,5 @@
 # binary
-task-cli
+task-cli-go
 *.exe
 
 # OS
