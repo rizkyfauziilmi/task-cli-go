@@ -116,7 +116,7 @@ func MarkStatus(tasks []model.Task, args []string, status string) {
 		return
 	}
 
-	if status != model.StatusInProgress && status != model.StatusDone {
+	if !model.MarkValidStatuses[status] {
 		fmt.Println("Invalid status")
 		return
 	}
@@ -147,16 +147,20 @@ func ListTasks(tasks []model.Task, args []string) {
 	var filter string
 	if len(args) > 0 {
 		filter = strings.ToLower(args[0])
-		if filter != model.StatusDone && filter != model.StatusInProgress && filter != model.StatusTodo {
+		if !model.ValidStatuses[filter] {
 			fmt.Println("Invalid filter. Use: todo, in-progress, done")
 			return
 		}
 	}
 
+	found := false
+
 	for _, t := range tasks {
 		if filter != "" && t.Status != filter {
 			continue
 		}
+
+		found = true
 
 		fmt.Printf("[%d] %s\nStatus: %s\nCreated: %s\nUpdated: %s\n\n",
 			t.ID,
@@ -165,5 +169,13 @@ func ListTasks(tasks []model.Task, args []string) {
 			t.CreatedAt.Format("2006-01-02 15:04"),
 			t.UpdatedAt.Format("2006-01-02 15:04"),
 		)
+	}
+
+	if !found {
+		if filter != "" {
+			fmt.Printf("No tasks found with status: %s\n", filter)
+		} else {
+			fmt.Println("No tasks found")
+		}
 	}
 }
